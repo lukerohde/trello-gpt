@@ -1,0 +1,20 @@
+version: "3"
+services:
+  app:
+    volumes:
+      - ./app:/app:delegated
+    command:
+      - ./docker-start.override
+    ports:
+      - "$APP_PORT:3000"
+    networks:
+      development:
+  db:
+    ports:
+      - "5432:5432"
+    networks:
+      - development
+#    volumes:
+#      - ./backup.sql.gz:/docker-entrypoint-initdb.d/seed.sql.gz
+networks:
+  development:
