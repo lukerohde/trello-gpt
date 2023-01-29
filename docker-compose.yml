@@ -11,6 +11,7 @@ services:
       - POSTGRES_USER
       - POSTGRES_PASSWORD
       - OPENAI_API_KEY
+      - TRELLO_ENDPOINT
       - TRELLO_API_KEY
       - TRELLO_TOKEN
       - PULSE_SERVER
@@ -21,8 +22,6 @@ services:
       - USER_NAME
       - BOT_NAME
       - SPEECH_PREFIX
-    links:
-      - db
     volumes:
       - ./app:/app
       - ./packages:/usr/local/lib/python3.11/site-packages

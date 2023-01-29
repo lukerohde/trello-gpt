@@ -22,6 +22,8 @@ class Application:
                 self.config.voice.stop()
             elif prompt.lower() == 'f':
                 self.history = self._primer();
+            elif prompt[0:3] == "tb ":
+                self.history += self.config.trello.get_board(prompt[3:])
             elif prompt[0:2] == "l ":
                 self.history += self._load_file(prompt[2:])
             else: 
