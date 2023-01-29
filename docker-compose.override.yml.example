@@ -9,12 +9,5 @@ services:
       - "$APP_PORT:3000"
     networks:
       development:
-  db:
-    ports:
-      - "5432:5432"
-    networks:
-      - development
-#    volumes:
-#      - ./backup.sql.gz:/docker-entrypoint-initdb.d/seed.sql.gz
 networks:
   development:

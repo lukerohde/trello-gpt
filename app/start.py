@@ -1,59 +1,26 @@
 import os
-import openai
-import requests
-import ipdb
+import json
 
-# Define the API endpoint
-endpoint = "https://api.trello.com/1"
-trello_api_key = os.getenv("TRELLO_API_KEY")
-trello_token = os.getenv("TRELLO_TOKEN")
+from texttospeech import TextToSpeech
+from chatgpt import ChatGPT
+from config import Config
+from application import Application
 
-# Get all boards
-url = f"{endpoint}/members/me/boards?key={trello_api_key}&token={trello_token}"
-r = requests.get(url)
+config = Config(
+    botname = os.getenv("BOT_NAME"),
+    username = os.getenv("USER_NAME"),
+    speech_prefix = os.getenv("SPEECH_PREFIX"),
+    primer_file = os.getenv("PRIMER_FILE"),
+    bot = ChatGPT("text-davinci-003", os.getenv("OPENAI_API_KEY")),
+    voice=TextToSpeech(os.getenv("AZURE_ENDPOINT"), os.getenv("AZURE_API_KEY"), os.getenv("AZURE_VOICE"))
+)
 
-
-jobs = ""
-if r.status_code == 200: 
-    boards = r.json()
-    for board in boards:
-        if board['name'] == "Odd Jobs Altona":
-            print(board["id"] + ": " + board["name"] + " - " + board["url"])
-            url = f"{endpoint}/boards/{board['id']}/lists?key={trello_api_key}&token={trello_token}"
-            r = requests.get(url)
-            if r.status_code == 200: 
-                lists = r.json()
-                for list in lists: 
-                    if "Brook" in list['name'] and not "Done" in list['name']:
-                        print("  " + list["id"] + ": " + list["name"])
-                        url=f"{endpoint}/lists/{list['id']}/cards?key={trello_api_key}&token={trello_token}"
-                        r = requests.get(url)
-                        if r.status_code == 200:
-                            cards = r.json()
-                            for card in cards: 
-                                jobs += f"{list['name']} - {card['name']}\n"
-                                print("    " + card["id"] + ": " + card["name"])
+app = Application(config)
+app.go()
 
 
+    
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
-history = f"Assistant: These are your jobs\n{jobs}\n\nAssistant: What can I help with?\n"
-
-while True:
-    # Prompt user for input
-    print(history)
-
-    prompt = input("\n You (type 'q' to quit): ")
-    if prompt.lower() == 'q':
-        break
-
-    history += "\n\nUSER: " + prompt
-    # Make API request
-    response = openai.Completion.create(model="text-davinci-003", prompt=history, temperature=0.5, max_tokens=250)
-    print(response)
-
-    answer = response["choices"][0]["text"]
-    history += answer 
             
 
 

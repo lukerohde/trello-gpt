@@ -13,34 +13,24 @@ services:
       - OPENAI_API_KEY
       - TRELLO_API_KEY
       - TRELLO_TOKEN
+      - PULSE_SERVER
+      - AZURE_API_KEY
+      - AZURE_VOICE
+      - AZURE_ENDPOINT
+      - PRIMER_FILE
+      - USER_NAME
+      - BOT_NAME
+      - SPEECH_PREFIX
     links:
       - db
     volumes:
       - ./app:/app
       - ./packages:/usr/local/lib/python3.11/site-packages
       - root_app:/root # for bash history etc
+      - ~/.config/pulse:/root/.config/pulse
     tty: true
     stdin_open: true
     command: ./docker-start
-  db:
-    image: postgres:9.6.8
-    restart: unless-stopped
-    environment:
-      - PGDATA=/pgdata
-      - POSTGRES_DB
-      - POSTGRES_HOST
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
-    volumes:
-      - pgdata:/pgdata
-      - root_db:/root # for bash history etc
-  notebook:
-    image: jupyter/scipy-notebook:latest
-    ports:
-      - "8888:8888"
-    volumes:
-      - "./notebook:/home/jovyan/work"
-    command: "start-notebook.sh --NotebookApp.token='${JUPYTER_TOKEN}'"
 volumes:
   root_app:
   root_db:
