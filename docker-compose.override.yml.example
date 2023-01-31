@@ -5,8 +5,6 @@ services:
       - ./app:/app:delegated
     command:
       - ./docker-start.override
-    ports:
-      - "$APP_PORT:3000"
     networks:
       development:
 networks:

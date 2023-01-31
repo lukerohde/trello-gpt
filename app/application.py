@@ -1,4 +1,6 @@
 import re
+import os
+import subprocess 
 
 class Application:
     def __init__(self, config):
@@ -13,7 +15,11 @@ class Application:
             print(f"TOKENS: {self.config.bot.tokens}");
 
             prompt = input(f"\n{self.config.username}('q' to quit, 'r' to replay, 's' to stop, 'f' to forget): ")
-
+            
+            if prompt == '':
+                prompt = self._prompt_from_editor() 
+                self.history += prompt
+                
             if prompt.lower() == 'q':
                 break
             elif prompt.lower() == 'r':
@@ -62,5 +68,15 @@ class Application:
             history += f"### START OF {filename} ###"
             history += f.read()
             history += f"### END OF {filename} ###"
+            
+    def _prompt_from_editor(self):
+        result = ""
+        with open('temp_prompt.txt', 'w') as f:  
+            f.write('')
+        subprocess.call([self.config.editor, 'temp_prompt.txt'])
+        with open('temp_prompt.txt', 'r') as f:  
+            result = f.read() 
+        return result
+            
 
     
