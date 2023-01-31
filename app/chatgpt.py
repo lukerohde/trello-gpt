@@ -4,8 +4,8 @@ class ChatGPT():
         openai.api_key = key
         self.model = model
         self.tokens = 0
-        self.temperature = 0.5
-        self.max_tokens = 2000
+        self.temperature = 0.8
+        self.max_tokens = 256
         self.frequency_penalty = 1
     
     def answer(self, history):
