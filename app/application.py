@@ -59,8 +59,9 @@ class Application:
     
     def _load_file(self, filename):
         with open(filename, "r") as f:
-            history += f"### START OF {filename} ###"
+            history = f"### START OF {filename} ###"
             history += f.read()
             history += f"### END OF {filename} ###"
+        return history
 
     
