@@ -13,7 +13,11 @@ config = Config(
     speech_prefix = os.getenv("SPEECH_PREFIX"),
     primer_file = os.getenv("PRIMER_FILE"),
     editor = os.getenv("EDITOR") or "nano", 
-    bot = ChatGPT("text-davinci-003", os.getenv("OPENAI_API_KEY")),
+    bot = ChatGPT(
+        os.getenv("OPENAI_API_KEY"), 
+        os.getenv("GPT_MODEL") or "text-davinci-003", 
+        os.getenv("GPT_TEMP") or "0.8", 
+        os.getenv("GPT_TOKENS") or 256),
     voice=TextToSpeech(os.getenv("AZURE_ENDPOINT"), os.getenv("AZURE_API_KEY"), os.getenv("AZURE_VOICE")),
     trello=Trello(os.getenv("TRELLO_ENDPOINT"), os.getenv("TRELLO_API_KEY"), os.getenv("TRELLO_TOKEN"))
 )

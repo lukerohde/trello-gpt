@@ -1,11 +1,11 @@
 import openai
 class ChatGPT():
-    def __init__(self, model, key):
+    def __init__(self, key, model, temp, tokens):
         openai.api_key = key
         self.model = model
         self.tokens = 0
-        self.temperature = 0.8
-        self.max_tokens = 256
+        self.temperature = float(temp)
+        self.max_tokens = int(tokens)
         self.frequency_penalty = 1
     
     def answer(self, history):

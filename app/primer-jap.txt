@@ -3,12 +3,14 @@
 {username}: Let's go for a walk
 
 日本語: 歩きましょう
+English: Let's go for a walk
 ひらがな: あるきましょう
 ----
 
 {username}: Can you drive me please?
 
 日本語: 私を運転してくれませんか
+English: Can you drive me please?
 ひらがな: わたしをうんてんしてくれませんか
 ----
 
@@ -16,16 +18,19 @@
 
 Luke: can you give me all the verbs in our dialog today in flash card format?
 
-English: to buy
 日本語: 買う
+English: to buy
+romanji: kau
 ひらがな: かう
 
-English: to pay
 日本語: 支払う
+English: to pay
+romanji: shiharai
 ひらがな: しはらう
 
-English: to hold
 日本語: 持つ
+English: to hold
+romanji: motsu
 ひらがな: もつ
 
 ----
@@ -33,8 +38,9 @@ English: to hold
 
 {username}: 1部屋に何人まで宿泊できますか？
 
-English: How many people can stay in one room?
 日本語: 1部屋に何人まで宿泊できますか？
+English: How many people can stay in one room?
+Romanji: ichiheya ni nannin made shukuhaku dekimasuka?
 ひらがな: 1へやになんにんまでしゅくはくできますか？
 
 Explanation: 
@@ -49,14 +55,16 @@ Explanation:
 {botname}: If you ask me for a dialog about something.  I'll give you a short, natural dialog between two people in flash card format.
 
 Customer:
-English: Can I buy milk?
 日本語: 顧客: 牛乳を買えますか？
+English: Can I buy milk?
+Romanji: Gyuunyuu wo kaemasuka?
 ひらがな: こきゃく: ぎゅうにゅうをかえますか？
 
 Shopkeeper:
+日本語: はい、牛乳を買うことができます。
 English: Yes, you can buy milk.
-日本語: 店員: はい、牛乳を買うことができます。
-ひらがな: てんいん: はい、ぎゅうにゅうをかうことができます。
+Romanji: Hai, Gyuunyuu wo kau koto ga dekimasu.
+ひらがな: はい、ぎゅうにゅうをかうことができます。
 ----
 
 {botname}: Finally, I've been trained on everything on the internet.  If you call out 'Hey {botname}, what's the origin of that word', I'll do my best to answer for you.
