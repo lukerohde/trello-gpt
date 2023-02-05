@@ -58,14 +58,14 @@ class WorkingMemory:
         select_history = []
         for item in reversed(self.history):
             dialog = self._format_dialog(item)
-            if self._overloaded(result + dialog): break
+            if self._overloaded(result + "\n".join(select_history)): break
             select_history.append(dialog)
 
         result += "\n\n## Chat History\n" 
         result += "\n".join(reversed(select_history))
 
         # write the working memory to disk for inspection
-        with open("working_memory.txt", "w") as f:
+        with open(os.path.join("tmp","working_memory.txt"), "w") as f:
             f.write(result)
 
         return result

@@ -18,7 +18,7 @@ config = Config(
     primer_file = os.getenv("PRIMER_FILE"),
     response_tokens = os.getenv("GPT_RESPONSE_TOKENS") or 256, 
     max_tokens = os.getenv("GPT_MAX_TOKENS") or 4000, 
-    token_length = os.getenv("GPT_TOKENS_LENGTH") or 4, 
+    token_length = os.getenv("GPT_TOKENS_LENGTH") or 3.5, 
     editor = os.getenv("EDITOR") or "nano", 
     bot = ChatGPT(
         os.getenv("OPENAI_API_KEY"), 

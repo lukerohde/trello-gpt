@@ -74,10 +74,10 @@ class Application:
             
     def _prompt_from_editor(self):
         result = ""
-        with open('temp_prompt.txt', 'w') as f:  
+        with open(os.path.join('tmp','temp_prompt.txt'), 'w') as f:  
             f.write('')
-        subprocess.call([self.config.editor, 'temp_prompt.txt'])
-        with open('temp_prompt.txt', 'r') as f:  
+        subprocess.call([self.config.editor, os.path.join('tmp','temp_prompt.txt')])
+        with open(os.path.join('tmp','temp_prompt.txt'), 'r') as f:  
             result = f.read() 
         return result
             
