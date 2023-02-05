@@ -1,24 +1,20 @@
 import re
 import os
 import subprocess 
+import datetime
 
 class Application:
     def __init__(self, config):
         self.config = config
-        self.history = self._primer()
-
-
+        
     def go(self):
         while True:
-            # Prompt user for input
-            print(self.history)
-            print(f"TOKENS: {self.config.bot.tokens}");
-
+            # Prompt user for input 
+            print(self.config.working_memory.retrieve())
             prompt = input(f"\n{self.config.username}('q' to quit, 'r' to replay, 's' to stop, 'f' to forget): ")
             
             if prompt == '':
                 prompt = self._prompt_from_editor() 
-                self.history += prompt
                 
             if prompt.lower() == 'q':
                 break
@@ -27,28 +23,35 @@ class Application:
             elif prompt.lower() == 's':
                 self.config.voice.stop()
             elif prompt.lower() == 'f':
-                self.history = self._primer();
+                self.history = self.config.working_memory.forget_history();
             elif prompt[0:3] == "tb ":
                 self.history += self.config.trello.get_board(prompt[3:])
             elif prompt[0:2] == "l ":
                 self.history += self._load_file(prompt[2:])
             else: 
-                self.history += f"\n\n{self.config.username}: " + prompt + "\n"
-                answer = self.config.bot.answer(self.history)
+
+                self.config.working_memory.add_dialog(
+                    self.config.username,
+                    datetime.datetime.now(),
+                    prompt
+                )
+                
+                bot_memory = self.config.working_memory.retrieve()
+                bot_memory += f"\n\n{self.config.botname}: "
+                
+                answer = self.config.bot.answer(bot_memory)
+
+                self.config.working_memory.add_dialog(
+                    self.config.botname,
+                    datetime.datetime.now(),
+                    answer
+                )
 
                 text = self._find_something_to_say(answer)
                 
                 if text != "": 
                     self.config.voice.speak_in_background(text)
-
-                self.history += answer + "\n\n----"
-    
-    def _primer(self):
-        result = ""
-        with open(self.config.primer_file, "r") as f:
-            result = f.read()
-            result = result.format(botname=self.config.botname,username=self.config.username)
-        return result
+                
         
     def _find_something_to_say(self, text): 
         # Function to speak text in the background 

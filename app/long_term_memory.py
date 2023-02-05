@@ -18,7 +18,7 @@ class LongTermMemory():
         if not os.path.exists(self.cache_path):
             os.makedirs(self.cache_path)
        
-    def memorize(self, string):
+    def memorize(self, string: str):
         hash = self._hash(string)
 
         # return if already memorized
@@ -30,7 +30,7 @@ class LongTermMemory():
         embedding = self._get_embedding(string)
         result = {
             'hash': hash, 
-            'timestamp': datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S"),
+            'timestamp': datetime.datetime.now().strftime('%A %d %B %Y %I:%M%p'),
             'string': string, 
             'embedding': embedding
         }
@@ -42,7 +42,7 @@ class LongTermMemory():
         self._load_cache(self.cache_path) # load new memories (there may be multiple instances running)
         
         thought = self.memorize(string) # get current embedding.  The act of recalling will memorize the current string too.
-
+        
         distances = [
             {
                 'string': data['string'], 
@@ -102,7 +102,7 @@ class LongTermMemory():
 
     def _load_cache(self, path):
         for fn in os.listdir(self.cache_path):
-            self._load(fn)
+            if len(fn) == 32: self._load(fn) # only load hashes
 
             
         
