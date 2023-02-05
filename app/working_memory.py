@@ -51,7 +51,7 @@ class WorkingMemory:
         
         # load memories
         memories = self._retrieve_memories()
-        result += "\n\n## Memories\n" 
+        #result += "\n\n## Memories\n" 
         result += self._format_memories(memories)
 
         #keep as much coversation history as possible in memory
@@ -61,7 +61,7 @@ class WorkingMemory:
             if self._overloaded(result + "\n".join(select_history)): break
             select_history.append(dialog)
 
-        result += "\n\n## Chat History\n" 
+        #result += "\n\n## Chat History\n" 
         result += "\n".join(reversed(select_history))
 
         # write the working memory to disk for inspection
