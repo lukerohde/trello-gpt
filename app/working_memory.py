@@ -39,7 +39,8 @@ class WorkingMemory:
         
         self.history.append(dialog)
         self._save_history()
-        self._update_memory()
+        if agent == self.config.botname:
+            self._update_memory(self._memory_episode())
 
         return self._format_dialog(dialog) # this isn't needed
 
@@ -51,8 +52,9 @@ class WorkingMemory:
         
         # load memories
         memories = self._retrieve_memories()
-        #result += "\n\n## Memories\n" 
-        result += self._format_memories(memories)
+        if len(memories):
+            result += f"\n\n## {self.config.botname} keep this in mind when answering. \n" 
+            result += self._format_memories(memories)
 
         #keep as much coversation history as possible in memory
         select_history = []
@@ -84,9 +86,8 @@ class WorkingMemory:
         result = self.config.long_term_memory.recall(result, self.memory_count)
         return result
 
-    def _update_memory(self):
-        result = self._memory_episode()
-        result = self.config.long_term_memory.memorize(result)
+    def _update_memory(self, episode):
+        result = self.config.long_term_memory.memorize(episode)
         return result # not necessary
     
     def _memory_episode(self):
@@ -129,6 +130,7 @@ class WorkingMemory:
     def _format_memory(self, memory):
         result = f"### {self.config.botname} remembers {memory['timestamp']}\n"
         result += '' + memory['string'].replace('\n', '\n')
+        result += "---\n"
         return result
 
 

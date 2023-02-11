@@ -46,11 +46,13 @@ class Application:
                     datetime.datetime.now(),
                     answer
                 )
-
-                text = self._find_something_to_say(answer)
                 
-                if text != "": 
-                    self.config.voice.speak_in_background(text)
+                if self.config.speech_on:
+                    text = self._find_something_to_say(answer)
+                
+                    if text != "": 
+                        self.config.voice.speak_in_background(text)
+            
                 
         
     def _find_something_to_say(self, text): 

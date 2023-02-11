@@ -22,6 +22,7 @@ services:
       - USER_NAME
       - BOT_NAME
       - SPEECH_PREFIX
+      - SPEECH_ON
     volumes:
       - ./app:/app
       - ./packages:/usr/local/lib/python3.11/site-packages

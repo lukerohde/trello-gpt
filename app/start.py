@@ -14,6 +14,7 @@ from working_memory import WorkingMemory
 config = Config(
     botname = os.getenv("BOT_NAME"),
     username = os.getenv("USER_NAME"),
+    speech_on = os.getenv("SPEECH_ON"),
     speech_prefix = os.getenv("SPEECH_PREFIX"),
     primer_file = os.getenv("PRIMER_FILE"),
     response_tokens = os.getenv("GPT_RESPONSE_TOKENS") or 256, 
