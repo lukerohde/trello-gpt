@@ -25,7 +25,7 @@ services:
       - SPEECH_ON
     volumes:
       - ./app:/app
-      - ./packages:/usr/local/lib/python3.11/site-packages
+      # - ./packages:/usr/local/lib/python3.11/site-packages
       - root_app:/root # for bash history etc
       - ~/.config/pulse:/root/.config/pulse
     tty: true
