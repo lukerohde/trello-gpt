@@ -3,9 +3,9 @@ services:
   app:
     volumes:
       - ./app:/app:delegated
-      - ./.packages:/home/pyuser/.local # /usr/local/lib/python3.11/site-packages
       - app_user:/home/pyuser # for bash history etc
       - ~/.config/pulse:/root/.config/pulse
+      #- ./.packages:/home/pyuser/.local # /usr/local/lib/python3.11/site-packages
     command:
       - ./docker-start.override
     networks:
