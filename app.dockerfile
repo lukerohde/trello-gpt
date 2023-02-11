@@ -10,7 +10,9 @@ RUN mkdir /app
 WORKDIR /app
 
 COPY ./app/requirements.txt /app
-# RUN pip install -r /home/requirements.txt
 RUN --mount=type=cache,target=/root/.cache/pip pip install -r /app/requirements.txt
 
 COPY ./app /app
+
+RUN adduser cgpt-user
+USER cgpt-user
