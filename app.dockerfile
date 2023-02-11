@@ -9,6 +9,8 @@ ENV PATH=/home/pyuser/.local/bin:"$PATH"
 
 RUN mkdir /home/pyuser/app
 WORKDIR /home/pyuser/app
-COPY ./app /home/pyuser/app
+
+COPY ./app/requirements.txt /home/pyuser/app/requirements.txt
 RUN pip install --user -r ./requirements.txt
 
+COPY ./app /home/pyuser/app
