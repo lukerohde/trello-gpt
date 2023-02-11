@@ -1,6 +1,8 @@
 version: "3"
 services:
   app:
+    volumes:
+      - ./app:/home/pyuser/app
     build:
       context: .
       dockerfile: ./app.dockerfile
@@ -23,15 +25,6 @@ services:
       - BOT_NAME
       - SPEECH_PREFIX
       - SPEECH_ON
-    volumes:
-      - ./app:/app
-      - ./packages:/usr/local/lib/python3.11/site-packages
-      - root_app:/root # for bash history etc
-      - ~/.config/pulse:/root/.config/pulse
     tty: true
     stdin_open: true
-    command: ./docker-start
-volumes:
-  root_app:
-  root_db:
-  pgdata:
+    command: "python start.py"

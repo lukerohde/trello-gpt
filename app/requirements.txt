@@ -1,9 +1,7 @@
-click
 requests
 openai
 ipdb
 wheel #needed for simpleaudio
 simpleaudio
-pydub
 scipy
 backoff

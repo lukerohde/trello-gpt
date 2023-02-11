@@ -1,6 +1,5 @@
 import threading 
 import requests
-from pydub import AudioSegment
 import simpleaudio as sa
 
 class TextToSpeech():

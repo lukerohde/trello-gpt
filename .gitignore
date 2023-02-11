@@ -1,11 +1,10 @@
-packages
-pgdata
+.packages
 docker-compose.override.yml
 .env
 __pycache__
-packages
 temp_prompt.txt
 memory
 working_memory.txt
 tmp
+*.pyc
 

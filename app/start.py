@@ -1,15 +1,13 @@
 import os
-import json
-import ipdb
-import datetime
+import signal
 
-from texttospeech import TextToSpeech
-from chatgpt import ChatGPT
 from config import Config
-from application import Application
+from chatgpt import ChatGPT
 from trello import Trello 
 from long_term_memory import LongTermMemory
 from working_memory import WorkingMemory
+from text_to_speech import TextToSpeech
+from application import Application
 
 config = Config(
     botname = os.getenv("BOT_NAME"),
@@ -35,5 +33,13 @@ config = Config(
 config.working_memory.set_config(config) #hmmm....
 
 app = Application(config)
+
+def handle_exit(signal, frame):
+    print("\nShutting down...")
+    raise SystemExit
+
+signal.signal(signal.SIGINT, handle_exit) # ctrl+c
+signal.signal(signal.SIGTERM, handle_exit) # kill signal
+
 app.go()
 

@@ -1,17 +1,14 @@
 #!/bin/sh
+pip install --user -r ./requirements.txt
 
-pip install --no-cache-dir -r /app/requirements.txt
-
-echo Expecting you to run 
-echo # docker-compose up www && docker-compose exec /bin/bash
-echo # python start.py
+echo -------------------------------------------------------------
+echo Running $0.  This hangs the container and so you can shell in
+echo \# docker-compose up www \&\& docker-compose exec /bin/bash
+echo \# python start.py
 
 # THIS KEEPS THE CONTAINER RUNNING
 # AND GRACEFULLY KILLS IT TOO
-trap 'pkill pip && kill -TERM $PID' TERM INT
-tail -f /dev/null & 
-PID=$!
-wait $PID
-trap - TERM INT
-wait $PID
+trap "echo $0 gracefully shutting down... && pkill python" TERM INT
+tail -f /dev/null &
+wait 
 EXIT_STATUS=$?
