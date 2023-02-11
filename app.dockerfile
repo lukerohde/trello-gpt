@@ -11,6 +11,6 @@ RUN mkdir /home/pyuser/app
 WORKDIR /home/pyuser/app
 
 COPY ./app/requirements.txt /home/pyuser/app/requirements.txt
-RUN pip install --user -r ./requirements.txt
+RUN --mount=type=cache,target=/home/pyuser/.cache/pip pip install --user -r ./requirements.txt
 
 COPY ./app /home/pyuser/app
