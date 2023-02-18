@@ -23,9 +23,13 @@ class Application:
             elif prompt.lower() == 's':
                 self.config.voice.stop()
             elif prompt.lower() == 'f':
-                self.history = self.config.working_memory.forget_history();
+                self.config.working_memory.forget_history();
             elif prompt[0:3] == "tb ":
-                self.history += self.config.trello.get_board(prompt[3:])
+                self.config.working_memory.add_dialog(
+                    self.config.username,
+                    datetime.datetime.now(),
+                    self.config.trello.get_board(prompt[3:])
+                )
             elif prompt[0:2] == "l ":
                 self.history += self._load_file(prompt[2:])
             else: 
